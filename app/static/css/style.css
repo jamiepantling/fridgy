@@ -3,3 +3,41 @@
 .logo-text {
     font-family: 'Koulen', cursive;
 }
+
+#id_username { 
+    border: 1px solid black;
+    width: 343px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+#id_password{ 
+    border: 1px solid black;
+    width: 343px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.btn {
+    width: 137px;
+    height: 52px;
+    border-radius: 30px;
+    background-color: #d7dcf9;
+    color: black;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+#logo {
+    height: 45px;
+    margin: 0 5px 0 0;
+}
+
+#login-fridge {
+    width: 80px;
+}
+
+#logo-holder {
+    display: flex;
+    align-items: center;
+}

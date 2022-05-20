@@ -19,9 +19,18 @@
                     <li>
                         <a class="black-text" href="">Household</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li>
-                        <a class="black-text" href="">J</a>
+                        <a class="black-text" href="{% url "logout" %}">Log out</a>
                     </li>
+                    {% else %}
+                    <li>
+                        <a class="black-text" href="{% url "signup" %}">Sign up</a>
+                    </li>
+                    <li>
+                        <a class="black-text" href="{% url "login" %}">Log in</a>
+                    </li>
+                    {% endif %}
                     </ul>
             </div>
         </nav>

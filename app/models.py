@@ -2,7 +2,7 @@ from unicodedata import category
 from django.db import models
 from django.urls import reverse
 from datetime import datetime, date
-# from Django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 
 # Food Model
@@ -13,7 +13,7 @@ class Food(models.Model):
     count = models.IntegerField()
     food_image = models.CharField(max_length=200)
     shareable = models.BooleanField(default=False)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.food_name} x {self.count} expires {self.expiry} shareable: {self.shareable}'
@@ -34,7 +34,12 @@ class Household(models.Model):
 
 # Profile Model (Extends user model)
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     household = models.ForeignKey(Household, on_delete=models.CASCADE)
-#     user_image = models.CharField(max_length=200)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    household = models.ForeignKey(Household, on_delete=models.CASCADE)
+    user_image = models.CharField(
+        max_length=200,
+        default='https://i.imgur.com/G4NNtuW.png')
+
+    def __str__(self):
+        return f'{self.user} in {self.household}'

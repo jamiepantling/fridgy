@@ -80,6 +80,7 @@ DATABASES = {
         'NAME': 'fridgy',
         'USER': 'somay',
         'PASSWORD': 'password'
+        #Making comment
     }
 }
 

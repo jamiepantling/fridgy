@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
 
     # accounts url patterns
     path('accounts/signup/', views.signup, name='signup'),
+    path("__reload__/", include("django_browser_reload.urls")),
     path('profile/<int:user_id>/', views.profile_detail, name='profile_detail'),
     path('profile/<int:user_id>/edit/', views.profile_edit, name='profile_edit'),
     path('profile/<int:user_id>/update/', views.profile_update, name='profile_update'),

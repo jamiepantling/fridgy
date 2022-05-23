@@ -1,0 +1,10 @@
+<h1>Household</h1>
+<h3>Only one houhsehold per user so this page is just to check household has been cretaed</h3>
+
+{% for h in household %}
+<p>Name: {{ h.name }}</p>
+<p>ID: {{ h.id }}</p>
+<a href="{% url 'household_update' h.id %}">EDIT</a>
+<a href="{% url 'household_delete' h.id %}">DELETE</a>
+
+{% endfor %}

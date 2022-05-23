@@ -6,36 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fridgy</title>
-    
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     {% tailwind_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
     <header>
         <nav>
-            <div class="">
-
-                <a href="" class="">
-                    <div id="logo-holder" class="logo-text text-xl">
+            <div class="m-2 flex justify-end">
+                <div class="flex-1 ">
+                    <a href="" class="">
+                        <div id="logo-holder" class="  logo-text text-xl">
                         <img id="logo" src="../../static/img/fridge.png"> FRIDGY
-                    </div>
-                </a>
-                <a href="/" class="brand-logo logo-text black-text left"><div id="logo-holder" ><img id="logo" src="../../static/img/fridge.png"> FRIDGY</div></a>
+                        </div>
+                    </a>
+                </div>
+                
 
-                <ul class=" ">
-                    <li>
-                        <a class="black-text" href="">Household</a> <!-- Add URL -->
-                    </li>
+                <ul class="flex m-2">
+                    
                     {% if user.is_authenticated %}
                     <li>
-                        <a class="black-text" href="{% url 'logout' %}">Log out</a>
+                        <a class="px-2" href="">Household</a> <!-- Add URL -->
+                    </li>
+                    <li>
+                        <a class="px-2" href="{% url 'logout' %}">Log out</a>
                     </li>
                     {% else %}
                     <li>
-                        <a class="black-text" href="{% url 'signup' %}">Sign up</a>
+                        <a class="px-2" href="{% url 'signup' %}">Sign up</a>
                     </li>
                     <li>
-                        <a class="black-text" href="{% url 'login' %}">Log in</a>
+                        <a class="px-2" href="{% url 'login' %}">Log in</a>
                     </li>
                     {% endif %}
                     </ul>

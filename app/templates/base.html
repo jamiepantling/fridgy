@@ -1,4 +1,4 @@
-{% load static %}
+{% load static tailwind_tags  %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,19 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fridgy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% tailwind_css %}
 </head>
 <body>
     <header>
         <nav>
-            <div class="nav-wrapper white ">
+            <div class="">
 
-                <a href="" class="brand-logo logo-text black-text left"><div id="logo-holder" ><img id="logo" src="../../static/img/fridge.png"> FRIDGY</div></a>
+                <a href="" class="">
+                    <div id="logo-holder" class="logo-text text-xl">
+                        <img id="logo" src="../../static/img/fridge.png"> FRIDGY
+                    </div>
+                </a>
 
-
-                <ul class="right ">
+                <ul class=" ">
                     <li>
                         <a class="black-text" href="">Household</a>
                     </li>

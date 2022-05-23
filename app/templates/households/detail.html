@@ -4,8 +4,8 @@
 <h1>{{ household.name }}</h1>
 {% if users_in_house %}
 {% for user in users_in_house %}
-<p>{{ user.username }}</p>
-<p>{{ user.first_name }} {{ user.last_name }}</p>
+<p>{{ user.user.username }}</p>
+<p>{{ user.user.first_name }} {{ user.user.last_name }}</p>
 <hr>
 {% endfor %}
 {% else %}

@@ -21,6 +21,16 @@ def foods_index(request):
     foods = Food.objects.all
     return render(request, 'foods/index.html', {"foods": foods})
 
+# Food Class-based views
+
+class FoodCreate(LoginRequiredMixin, CreateView):
+    model = Food
+    fields = ["food_name", "category", "expiry", "shareable", "count"]
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 # Household functions
 
 def household_index(request):

@@ -6,6 +6,7 @@ urlpatterns = [
     
     # Food url patterns
     path("foods/", views.foods_index, name="index"),
+    path("foods/create/", views.FoodCreate.as_view(), name="foods_create"),
     
     # Household url patterns
     path('household/', views.household_index, name='houeshold_index'), # Just to check if housheold had been created, no need to route users here

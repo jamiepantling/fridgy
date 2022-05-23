@@ -13,32 +13,33 @@
 <body>
     <header>
         <nav>
-            <div class="">
-
-                <a href="" class="">
-                    <div id="logo-holder" class="logo-text text-xl">
-                        <img id="logo" src="../../static/img/fridge.png"> FRIDGY
-                    </div>
-                </a>
-                <a href="/" class="brand-logo logo-text black-text left"><div id="logo-holder" ><img id="logo" src="../../static/img/fridge.png"> FRIDGY</div></a>
-
-                <ul class=" ">
-                    <li>
-                        <a class="black-text" href="">Household</a> <!-- Add URL -->
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li>
-                        <a class="black-text" href="{% url 'logout' %}">Log out</a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a class="black-text" href="{% url 'signup' %}">Sign up</a>
-                    </li>
-                    <li>
-                        <a class="black-text" href="{% url 'login' %}">Log in</a>
-                    </li>
-                    {% endif %}
+            <div class="flex w-full justify-between">
+                <div>
+                    <a href="" class="">
+                        <div id="logo-holder" class="logo-text text-xl">
+                            <img id="logo" src="../../static/img/fridge.png"> FRIDGY
+                        </div>
+                    </a>
+                </div>
+                <div class="">
+                    <ul>
+                        <li>
+                            <a class="" href="">Household</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a class="" href="{% url "logout" %}">Log out</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="" href="{% url "signup" %}">Sign up</a>
+                        </li>
+                        <li>
+                            <a class="" href="{% url "login" %}">Log in</a>
+                        </li>
+                        {% endif %}
                     </ul>
+                </div>
             </div>
         </nav>
     </header>

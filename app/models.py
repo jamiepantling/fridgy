@@ -36,7 +36,12 @@ class Household(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    household = models.ForeignKey(Household, on_delete=models.CASCADE)
+    household = models.ForeignKey(
+        Household,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+        )
     user_image = models.CharField(
         max_length=200,
         default='https://i.imgur.com/G4NNtuW.png')

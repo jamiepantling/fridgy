@@ -26,6 +26,10 @@ urlpatterns = [
     path('profile/<int:user_id>/update/', views.profile_update, name='profile_update'),
     path('profile/<int:pk>/delete/', views.ProfileDelete.as_view(), name='profile_delete'),
 
+    # Group url patterns
+    path('group/create/', views.group_create, name='group_create'),
+    path('group/<int:group_id>/', views.group_detail, name='group_detail'),
+
     # Tailwind CSS reload 
     path("__reload__/", include("django_browser_reload.urls")),
 ]

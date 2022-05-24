@@ -19,10 +19,14 @@ def home(request):
     return render(request, 'home.html')
 
 # Food functions
-#
+# @login_required
 def foods_index(request):
     foods = Food.objects.all
     return render(request, 'foods/index.html', {"foods": foods})
+# @login_required
+def foods_detail(request, food_id):
+    food = Food.objects.get(id=food_id)
+    return render(request, 'foods/detail.html', { 'food': food })
 
 # Food Class-based views
 
@@ -33,6 +37,12 @@ class FoodCreate(CreateView): # Add login mixin
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+class FoodUpdate(UpdateView): # Add login mixin
+    model = Food
+    fields = ['food_name', 'category', 'expiry', 'shareable', 'count']
+class FoodDelete(DeleteView): # Add login mixin
+    model = Food
+    success_url = 'foods_index' # Go back to all
 
 # Household functions
 # @login_required

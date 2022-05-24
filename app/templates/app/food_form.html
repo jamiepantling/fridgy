@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="flex-col justify-center items-center">
+  <div><h5 class="text-center font-bold mb-5">Add item</h5></div>
+  <div class="flex-col items-center justify-center">
+    <div>
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="flex justify-center mb-5">
+          {% render_field form.food_name placeholder="Add food" %}
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="mx-2">{% render_field form.shareable %}</div>
+          <div class="mx-2">Share with others?</div>
+        </div>
+
+        <div class="flex justify-center">
+          <input type="submit" value="Submit!" class="btn mt-10" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

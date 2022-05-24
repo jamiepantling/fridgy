@@ -17,6 +17,7 @@ urlpatterns = [
 
     # accounts url patterns
     path('accounts/signup/', views.signup, name='signup'),
+    path('password-change/', views.UserChangePassword.as_view(), name='user_change_password'),
     path("__reload__/", include("django_browser_reload.urls")),
     path('profile/<int:user_id>/', views.profile_detail, name='profile_detail'),
     path('profile/<int:user_id>/edit/', views.profile_edit, name='profile_edit'),

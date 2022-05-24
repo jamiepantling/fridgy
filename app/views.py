@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
@@ -8,6 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Food, Household, Profile
 from .forms import UpdateUserForm, UpdateProfileForm
 
@@ -101,6 +104,10 @@ def profile_update(request, user_id):
 class ProfileDelete(DeleteView):
     model = User
     success_url = '/'
+class UserChangePassword(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'registration/change_password.html'
+    success_message = 'Your password has been changed'
+    success_url = reverse_lazy('profile_detail')
 
 
 

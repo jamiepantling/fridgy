@@ -19,14 +19,14 @@ def home(request):
     return render(request, 'home.html')
 
 # Food functions
-
+#
 def foods_index(request):
     foods = Food.objects.all
     return render(request, 'foods/index.html', {"foods": foods})
 
 # Food Class-based views
 
-class FoodCreate(LoginRequiredMixin, CreateView):
+class FoodCreate(CreateView): # Add login mixin
     model = Food
     fields = ["food_name", "category", "expiry", "shareable", "count"]
 
@@ -35,10 +35,11 @@ class FoodCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 # Household functions
-
+# @login_required
 def household_index(request):
     household = Household.objects.all()
     return render(request, 'households/index.html', {'household': household})
+# @login_required
 def household_detail(request, household_id):
     household = Household.objects.get(id=household_id)
     users_in_house = Profile.objects.filter(household=household_id)
@@ -46,15 +47,19 @@ def household_detail(request, household_id):
 
 # Household class-based views
 
-class HouseholdCreate(CreateView):
+class HouseholdCreate(CreateView): # Add login mixin
     model = Household
     fields = ['name']
     success_url = '/' # Changed when new route finished
-class HouseholdUpdate(UpdateView):
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+class HouseholdUpdate(UpdateView): # Add login mixin
     model = Household
     fields = ['name']
     success_url = '/' # Changed later to household details
-class HouseholdDelete(DeleteView):
+class HouseholdDelete(DeleteView): # Add login mixin
     model = Household
     success_url = '/' # Change success?
 
@@ -73,16 +78,19 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+# @login_required
 def profile_detail(request, user_id):
     profile = Profile.objects.get(user=user_id)
     user = User.objects.get(id=user_id)
     return render(request, 'profile/detail.html', {'profile': profile, 'user': user})
+# @login_required
 def profile_edit(request, user_id):
     profile = Profile.objects.get(user=user_id)
     user = User.objects.get(id=user_id)
     update_user_form = UpdateUserForm()
     update_profile_form = UpdateProfileForm
     return render(request, 'profile/edit.html', {'user': user, 'profile': profile, 'update_user_form': update_user_form, 'update_profile_form': update_profile_form})
+# @login_required
 def profile_update(request, user_id):
     if request.method == 'POST':
         username = request.POST['username']
@@ -101,10 +109,10 @@ def profile_update(request, user_id):
         profile.save()
     return redirect('profile_detail', user_id=user_id)
 # Class Views
-class ProfileDelete(DeleteView):
+class ProfileDelete(DeleteView): # Add login mixin
     model = User
     success_url = '/'
-class UserChangePassword(SuccessMessageMixin, PasswordChangeView):
+class UserChangePassword(SuccessMessageMixin, PasswordChangeView): # Add login mixin
     template_name = 'registration/change_password.html'
     success_message = 'Your password has been changed'
     success_url = reverse_lazy('profile_detail')

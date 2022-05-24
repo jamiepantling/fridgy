@@ -21,7 +21,10 @@ def home(request):
 # Food functions
 # @login_required
 def foods_index(request):
-    foods = Food.objects.all
+    foods = Food.objects.all()
+    for food in foods:
+        profile = Profile.objects.get(user=food.user)
+        food.user_image = profile.user_image
     return render(request, 'foods/index.html', {"foods": foods})
 # @login_required
 def foods_detail(request, food_id):

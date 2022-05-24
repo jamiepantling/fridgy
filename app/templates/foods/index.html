@@ -17,8 +17,10 @@
                     <a href='{% url "foods_detail" food.id %}'><div class="">{{ food.food_name}}</div></a>
                     
                     <div class="flex items-center">
-                        <div class="px-4"> {{food.user.username}}</div>
-                        <a href=">
+                        <div class="">
+                            <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
+                        </div>
+                        <a href=''>
                             <img class="trash" src="../../static/img/trash.png">
                         </a>
                     </div>
@@ -39,7 +41,9 @@
                     <a href='{% url "foods_detail" food.id %}'><div class="">{{ food.food_name}}</div></a>
                     
                     <div class="flex items-center">
-                        <div class="px-4"> {{food.user.username}}</div>
+                        <div class="">
+                            <img class="foodbox-avatar mx-1 rounded-full" src='{{food.user_image}}'>
+                        </div>
                         <a href="">
                             <img class="trash" src="../../static/img/trash.png">
                         </a>
@@ -61,7 +65,9 @@
                     <a href='{% url "foods_detail" food.id %}'><div class="">{{ food.food_name}}</div></a>
                     
                     <div class="flex items-center">
-                        <div class="px-4"> {{food.user.username}}</div>
+                        <div class="">
+                            <img class="foodbox-avatar mx-1 rounded-full" src='{{food.user_image}}'>
+                        </div>
                         <a href="">
                             <img class="trash" src="../../static/img/trash.png">
                         </a>

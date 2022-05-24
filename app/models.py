@@ -1,17 +1,32 @@
 from unicodedata import category
 from django.db import models
 from django.urls import reverse
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from django.contrib.auth.models import User
 
+
+#For expiry default
+d = timedelta(days=7)
 
 # Food Model
 class Food(models.Model):
     food_name = models.CharField(max_length=50)
-    category = models.CharField(max_length=50)
-    expiry = models.DateField()
-    count = models.IntegerField()
-    food_image = models.CharField(max_length=200)
+    category = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True
+        )
+    expiry = models.DateField(default=date.today() + d)
+    count = models.IntegerField(
+        default=1,
+        blank=True,
+        null=True
+        )
+    food_image = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+        )
     shareable = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

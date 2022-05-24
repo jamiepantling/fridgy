@@ -11,7 +11,14 @@
     border-radius: 20px;
 }
 
-#id_password{ 
+#id_password1{ 
+    border: 1px solid black;
+    width: 343px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+#id_password2{ 
     border: 1px solid black;
     width: 343px;
     height: 41px;

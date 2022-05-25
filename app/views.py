@@ -1,3 +1,4 @@
+from distutils.log import error
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -52,20 +53,35 @@ class FoodDelete(DeleteView): # Add login mixin
     success_url = 'foods_index' # Go back to all
 
 # Household functions
+
+# Auth functions
+
+
+
 # @login_required
 def household_index(request):
     household = Household.objects.all()
     return render(request, 'households/index.html', {'household': household})
 # @login_required
 def household_detail(request, household_id):
-    household = Household.objects.get(id=household_id)
-    users_in_house = Profile.objects.filter(household=household_id)
-    return render(request, 'households/detail.html', { 'household': household, 'users_in_house': users_in_house })
+    error_message = ''
+    if request.user.profile.household == Household.objects.get(id=household_id):
+        household = Household.objects.get(id=household_id)
+        users_in_house = Profile.objects.filter(household=household_id)
+        return render(request, 'households/detail.html', { 'household': household, 'users_in_house': users_in_house })
+    else:
+        error_message = 'You are not in this household'
+        return redirect('home') # Change later?
 def household_edit(request, household_id):
-    household = Household.objects.get(id=household_id)
-    users_in_house = Profile.objects.filter(household=household_id)
-    users_not_in_house = Profile.objects.filter(household=None)
-    return render(request, 'households/edit.html', {'household': household, 'users_in_house': users_in_house, 'users_not_in_house': users_not_in_house})
+    error_message = ''
+    if request.user.profile.household == Household.objects.get(id=household_id):
+        household = Household.objects.get(id=household_id)
+        users_in_house = Profile.objects.filter(household=household_id)
+        users_not_in_house = Profile.objects.filter(household=None)
+        return render(request, 'households/edit.html', {'household': household, 'users_in_house': users_in_house, 'users_not_in_house': users_not_in_house})
+    else:
+        error_message = 'You are not in this household'
+        return redirect('home') # Change later?
 def household_update(request, household_id):
     error_message = ''
     if request.method == 'POST':

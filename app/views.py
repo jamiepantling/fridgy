@@ -5,40 +5,58 @@ from django.views.generic import ListView, DetailView
 
 # import login
 from django.contrib.auth import login
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Food, Household, Profile
-from .forms import UpdateUserForm, UpdateProfileForm
+from .forms import GroupCreationForm, UpdateUserForm, UpdateProfileForm
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 # Food functions
-
+# @login_required
 def foods_index(request):
-    foods = Food.objects.all
+    foods = Food.objects.all()
+    for food in foods:
+        profile = Profile.objects.get(user=food.user)
+        food.user_image = profile.user_image
     return render(request, 'foods/index.html', {"foods": foods})
+# @login_required
+def foods_detail(request, food_id):
+    food = Food.objects.get(id=food_id)
+    return render(request, 'foods/detail.html', { 'food': food })
 
 # Food Class-based views
 
-class FoodCreate(LoginRequiredMixin, CreateView):
+class FoodCreate(CreateView): # Add login mixin
+    def check(self):
+        print(self.request)
     model = Food
-    fields = ["food_name", "category", "expiry", "shareable", "count"]
-
+    fields = ["food_name","shareable"]
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        food = form.save(commit=False)
+        food.user = self.request.user
+        food.save()
+        return redirect('/foods/')
+        
+class FoodUpdate(UpdateView): # Add login mixin
+    model = Food
+    fields = ['food_name', 'category', 'expiry', 'shareable', 'count']
+class FoodDelete(DeleteView): # Add login mixin
+    model = Food
+    success_url = 'foods_index' # Go back to all
 
 # Household functions
-
+# @login_required
 def household_index(request):
     household = Household.objects.all()
     return render(request, 'households/index.html', {'household': household})
+# @login_required
 def household_detail(request, household_id):
     household = Household.objects.get(id=household_id)
     users_in_house = Profile.objects.filter(household=household_id)
@@ -46,15 +64,23 @@ def household_detail(request, household_id):
 
 # Household class-based views
 
-class HouseholdCreate(CreateView):
+class HouseholdCreate(CreateView): # Add login mixin
     model = Household
     fields = ['name']
-    success_url = '/' # Changed when new route finished
-class HouseholdUpdate(UpdateView):
+
+    def form_valid(self, form):
+        household = form.save(commit=False)
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        profile.household = household
+        household.save()
+        profile.save()
+        return redirect(f'/household/{household.pk}/')
+class HouseholdUpdate(UpdateView): # Add login mixin
     model = Household
     fields = ['name']
     success_url = '/' # Changed later to household details
-class HouseholdDelete(DeleteView):
+class HouseholdDelete(DeleteView): # Add login mixin
     model = Household
     success_url = '/' # Change success?
 
@@ -66,23 +92,27 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Profile.objects.create(user=user)
             login(request, user)
-            return redirect('profile_detail')
+            return redirect(f'/profile/{user.pk}')
         else:
             error_message = 'Something went wrong - please try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+# @login_required
 def profile_detail(request, user_id):
     profile = Profile.objects.get(user=user_id)
     user = User.objects.get(id=user_id)
     return render(request, 'profile/detail.html', {'profile': profile, 'user': user})
+# @login_required
 def profile_edit(request, user_id):
     profile = Profile.objects.get(user=user_id)
     user = User.objects.get(id=user_id)
     update_user_form = UpdateUserForm()
     update_profile_form = UpdateProfileForm
     return render(request, 'profile/edit.html', {'user': user, 'profile': profile, 'update_user_form': update_user_form, 'update_profile_form': update_profile_form})
+# @login_required
 def profile_update(request, user_id):
     if request.method == 'POST':
         username = request.POST['username']
@@ -100,11 +130,32 @@ def profile_update(request, user_id):
         myuser.save()
         profile.save()
     return redirect('profile_detail', user_id=user_id)
+
+def group_create(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = GroupCreationForm(request.POST)
+        if form.is_valid():
+            household = form.save()
+            household.user_set.add(request.user)
+            return redirect(f'/household/{household.pk}')
+        else:
+            error_message = 'Something went wrong - Please try again'
+    form = GroupCreationForm()
+    context = {'form': form, 'error_messsage': error_message}
+    return render(request, 'group/create.html', context)
+def group_detail(request, group_id):
+    group = Group.objects.get(id=group_id)
+    users = list(group.user_set.values_list('username', flat=True))
+    user = User.objects.get(id=request.user.id)
+    return render(request, 'group/detail.html', {'user': user, 'group': group, 'users': users})
+        
+
 # Class Views
-class ProfileDelete(DeleteView):
+class ProfileDelete(DeleteView): # Add login mixin
     model = User
     success_url = '/'
-class UserChangePassword(SuccessMessageMixin, PasswordChangeView):
+class UserChangePassword(SuccessMessageMixin, PasswordChangeView): # Add login mixin
     template_name = 'registration/change_password.html'
     success_message = 'Your password has been changed'
     success_url = reverse_lazy('profile_detail')

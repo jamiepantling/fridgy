@@ -4,19 +4,26 @@
     font-family: 'Koulen', cursive;
 }
 
-#id_username { 
-    border: 1px solid black;
+.edit-profile-container {
     width: 343px;
-    height: 41px;
-    border-radius: 20px;
 }
 
-#id_password{ 
+.profile-input-box {
+    border: 1px solid black;
+    width: 192px;
+    height: 41px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 8px 0 #d7dcf9;
+}
+
+.input-box {
     border: 1px solid black;
     width: 343px;
     height: 41px;
     border-radius: 20px;
+    box-shadow: inset 0 0 2px 0 #d7dcf9;
 }
+
 
 .btn {
     width: 137px;
@@ -24,8 +31,8 @@
     border-radius: 30px;
     background-color: #d7dcf9;
     color: black;
-    border: 1px solid black;
     font-weight: bold;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
 }
 
 #logo {
@@ -55,11 +62,17 @@
 }
 
 .food-box-shared {
-        box-shadow: inset 0 0 12.3px 0 #7da949;
+    box-shadow: inset 0 0 7px 0 #7da949;
+    color: #7da949
 }
 
 .food-box-off-limits {
-    box-shadow: inset 0 0 12.3px 0 #c16666;
+    box-shadow: inset 0 0 7px 0 #c16666;
+    color: #c16666
+}
+
+.foodbox-avatar {
+    height: 28px;
 }
 
 .trash {

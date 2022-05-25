@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.db import models
 from django.urls import reverse
 from datetime import datetime, date, timedelta
@@ -47,6 +46,7 @@ class Household(models.Model):
     def __str__(self):
         return self.name
 
+
 # Profile Model (Extends user model)
 
 class Profile(models.Model):
@@ -57,6 +57,7 @@ class Profile(models.Model):
         blank=True,
         null=True
         )
+    hosuehold_manager = models.BooleanField(default=False)
     user_image = models.CharField(
         max_length=200,
         default='https://i.imgur.com/G4NNtuW.png')

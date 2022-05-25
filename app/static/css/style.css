@@ -35,6 +35,14 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
 }
 
+.long-btn {
+    width: 225px;
+    height: 45px;
+    border-radius: 32px;
+    background-color: #d7dcf9;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
+}
+
 #logo {
     height: 45px;
     margin: 0 5px 0 0;
@@ -77,6 +85,10 @@
 
 .trash {
     height: 28px;
+}
+
+.detail-card-icon {
+    width: 20px;
 }
 
 .index-title, .sub-list-title {

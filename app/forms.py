@@ -2,7 +2,7 @@ from dataclasses import field
 import email
 from django import forms
 from django.contrib.auth.models import User, Group, Permission
-from .models import Profile
+from .models import Household, Profile
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
 class UpdateUserForm(forms.ModelForm):
@@ -22,4 +22,3 @@ class GroupCreationForm(forms.ModelForm):
         widgets = {
             'permissions': FilteredSelectMultiple("Permission", False, attrs={'rows': 2})
         }
-

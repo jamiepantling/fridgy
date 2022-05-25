@@ -1,20 +1,45 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-
-<div class="items-center flex flex-col">
-   <div class="">
-       <h5 class="text-center font-bold mb-5">{{ user.username }}</h5>
+<div class="edit-profile-container mx-auto">
+    <div class="max-w-s  shadow-md ">
+        <div class="flex flex-col items-center pb-10">
+            <img class="mb-3 w-40 h-40 rounded-full shadow-lg" src="{{ profile.user_image }}" alt="User image"/>
+            <h5 class="mb-1 text-xl text-gray-900 "> {{user.username}} </h5>
+            {% if user.first_name %}
+            <h4 class="text-4xl">{{user.first_name}} {{user.last_name}}</h4>
+            {% endif %}
+            <span class="text-sm mt-2 text-gray-500">{{ user.email }}</span>
+            <div class="flex mt-4  text-gray-800">
+                <img class="mx-2 detail-card-icon" src="../../static/img/household.svg"> 
+                {% if user.household %}
+                {{ user.household}}
+                {% else %}
+                {{user.username}} is not in a household.
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="items-center flex flex-col">
-        <img class="h-36 mb-5 rounded-full" src="{{ profile.user_image }}" alt="USER_IMAGE">
-        <ul>
-            <li class="mb-2"><span class="font-bold">First name:</span> {{ user.first_name }}</li>
-            <li class="mb-2"><span class="font-bold">Last name:</span> {{ user.last_name }}</li>
-            <li class="mb-2"><span class="font-bold">Email:</span> {{ user.email }}</li>
-            <li class="mb-2"><span class="font-bold">Household name:</span> {{ profile.household.name }}</li>
-            <li class="my-4"><a href="{% url 'user_change_password' %}"><button class="btn">Change password</button></a></li>
-        </ul>
+    <div class="my-4 flex-col items-center flex">
+        <a href="{% url 'profile_edit' user.id %}">
+            <button class="long-btn my-4 ">
+                <div class="flex justify-between items-center w-10/12">
+                    <div><img class=" h-10 mx-4" src="../../static/img/user.svg"> </div>
+                    <div>Edit Profile Info</div>
+                </div>
+        </button>
+        </a>
+        <a href="{% url 'user_change_password' %}">
+            <button class="long-btn my-4 ">
+                <div class="flex justify-between items-center w-11/12">
+                    <div><img class=" h-10 mx-4" src="../../static/img/key.svg"> </div>
+                    <div>Change Password</div>
+                </div>
+        </button>
+        </a>
     </div>
 </div>
+
+
+
 {% endblock %}

@@ -61,6 +61,33 @@ def household_detail(request, household_id):
     household = Household.objects.get(id=household_id)
     users_in_house = Profile.objects.filter(household=household_id)
     return render(request, 'households/detail.html', { 'household': household, 'users_in_house': users_in_house })
+def household_edit(request, household_id):
+    household = Household.objects.get(id=household_id)
+    users_in_house = Profile.objects.filter(household=household_id)
+    users_not_in_house = Profile.objects.filter(household=None)
+    return render(request, 'households/edit.html', {'household': household, 'users_in_house': users_in_house, 'users_not_in_house': users_not_in_house})
+def household_update(request, household_id):
+    error_message = ''
+    if request.method == 'POST':
+        user = User.objects.get(username=request.POST['user'])
+        household = Household.objects.get(id=household_id)
+        user.profile.household = household
+        user.save()
+        user.profile.save()
+    else:
+        error_message = 'Something went wrong - please try again'
+    return redirect('household_edit', household_id=household_id)
+def household_remove_user(request, household_id):
+    if request.method == 'POST':
+        
+        return redirect('household_edit', household_id=household_id)
+        
+    
+    # if request.method == 'POST':
+    #     household = Household.objects.get(id=household_id)
+        
+
+    return redirect('household_index')
 
 # Household class-based views
 
@@ -73,13 +100,14 @@ class HouseholdCreate(CreateView): # Add login mixin
         user = self.request.user
         profile = Profile.objects.get(user=user)
         profile.household = household
+        user.save()
         household.save()
         profile.save()
         return redirect(f'/household/{household.pk}/')
-class HouseholdUpdate(UpdateView): # Add login mixin
-    model = Household
-    fields = ['name']
-    success_url = '/' # Changed later to household details
+# class HouseholdUpdate(UpdateView): # Add login mixin
+#     model = Household
+#     fields = ['name']
+#     success_url = '/' # Changed later to household details
 class HouseholdDelete(DeleteView): # Add login mixin
     model = Household
     success_url = '/' # Change success?

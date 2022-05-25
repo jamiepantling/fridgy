@@ -79,7 +79,10 @@ def household_update(request, household_id):
     return redirect('household_edit', household_id=household_id)
 def household_remove_user(request, household_id):
     if request.method == 'POST':
-        
+        user = User.objects.get(username=request.POST['user'])
+        user.profile.household = None
+        user.save()
+        user.profile.save()
         return redirect('household_edit', household_id=household_id)
         
     

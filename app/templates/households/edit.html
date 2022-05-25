@@ -17,9 +17,9 @@
 <ul>
 {% for u in users_in_house %}
 <li>{{ u.user.username }} - {{ u.user.first_name }} {{ u.user.last_name }}
-    <form action="{% url 'household_remove_user' household.id %}" method="POST">
-        {% csrf_token %}
-        <input type="text" value="{{ u.user }}">
+<form action="{% url 'household_remove_user' household.id %}" method="POST">
+    {% csrf_token %}
+    <select name="user" style="display: none;"><option value="{{ u.user }}"></option></select>
         <input type="submit"></form></li>
 {% endfor %}
 

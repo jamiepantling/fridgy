@@ -142,3 +142,11 @@ hr {
     margin: 0;
 }
 
+.shared-text {
+    color: #7da949;
+}
+
+
+.not-shared-text {
+    color: #c16666;
+}

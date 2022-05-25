@@ -161,3 +161,7 @@ hr {
 .not-shared-text {
     color: #c16666;
 }
+
+.food-img {
+    width: 250px;
+}

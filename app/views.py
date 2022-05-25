@@ -37,7 +37,7 @@ class FoodCreate(CreateView): # Add login mixin
     def check(self):
         print(self.request)
     model = Food
-    fields = ["food_name","shareable"]
+    fields = ["food_name","shareable", "food_image"]
     def form_valid(self, form):
         food = form.save(commit=False)
         food.user = self.request.user
@@ -46,7 +46,7 @@ class FoodCreate(CreateView): # Add login mixin
         
 class FoodUpdate(UpdateView): # Add login mixin
     model = Food
-    fields = ['food_name', 'category', 'expiry', 'shareable', 'count']
+    fields = ['food_name', 'category', 'expiry', 'shareable', 'count', 'food_image']
 class FoodDelete(DeleteView): # Add login mixin
     model = Food
     success_url = 'foods_index' # Go back to all

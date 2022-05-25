@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %} 
 {% block content %}
+
 {% if error_message  %}
     <p class="red-text">{{error_message}}</p>
 {% endif %}
-<form action="{% url 'signup' %}" method="POST">
-    {% csrf_token %}
-    <div class="input-field">
-    {{ form.as_p }}
-    <input type="submit" class="btn" value="signup">
+<div class="flex justify-center">
+    
+    <div>
+        <h5 class="text-center font-bold mb-5">Sign up</h5>
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            <div class="grid-cols-1 items-center">
+                <div class="mt-5">
+                    {% render_field form.username placeholder="Username" %}
+                </div>
+                <div class="mt-5">
+                    {% render_field form.password1 placeholder="Password" %}
+                </div>
+                <div class="mt-5">
+                    {% render_field form.password2 placeholder="Re-enter password" %}
+                </div>
+                <div class="text-center">
+                    <input class="btn mt-5" type="submit" value="Sign up">
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-</form>
-
-
 {% endblock %}

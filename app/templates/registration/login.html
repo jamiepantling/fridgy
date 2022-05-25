@@ -6,7 +6,7 @@
     <div class="center"><img id="login-fridge" src="../../static/img/fridge.png"></div>
     <div class="center logo-text"><h4>Fridgy</h4></div>
 <div class="center" id="login-form-container">
-    <form action="{% url "login" %}" method="POST">
+    <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div><span>Username:</span></div>
         {{ form.username }}

@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 {% block content %} 
 
-<h1 class="flex justify-center font-bold mb-5">Household</h1>
-<h3 class="flex justify-center font-bold mb-5">Only one houhsehold per user. This page is just to check household has been created</h3>
+<div class=" flex flex-col items-center justify-center">
+<h1 >Household</h1>
 
 {% for h in household %}
-<p class="flex justify-center  mx-2">Name: {{ h.name }}</p>
-<p class="flex justify-center">ID: {{ h.id }}</p>
+<div>
+<!-- <div class=" flex justify-center border-2 border-neutral-900 rounded w-64 " > -->
+<p >Name: {{ h.name }}</p>
+<!-- </div> -->
 
-<div class="flex justify-center">
+<p >ID: {{ h.id }}</p>
+
+<div >
 <a href="{% url 'household_update' h.id %}" class=" btn mt-10 text-center">EDIT</a>
 </div>
 
-<div class="flex justify-center">
-<a href="{% url 'household_delete' h.id %}" class="btn mt-10 text-center">DELETE</a>
+<div >
+<a href="{% url 'household_delete' h.id %}" class="btn ">DELETE</a>
+</div>
 </div>
 {% endfor %}
-
+</div>
 {% endblock %}

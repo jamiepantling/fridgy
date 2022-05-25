@@ -27,7 +27,9 @@
                     
                     {% if user.is_authenticated %}
                     <li>
-                        <a class="px-2" href="">Household</a> <!-- Add URL -->
+                        <div class=" border-2 border-neutral-900 rounded">
+                        <a class="px-2 rounded-md" href="">Household</a> <!-- Add URL -->
+                        </div>
                     </li>
                     <li>
                         <a class="px-2" href="{% url 'logout' %}">Log out</a>

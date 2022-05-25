@@ -67,11 +67,15 @@ def household_detail(request, household_id):
 class HouseholdCreate(CreateView): # Add login mixin
     model = Household
     fields = ['name']
-    success_url = '/' # Changed when new route finished
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        household = form.save(commit=False)
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        profile.household = household
+        household.save()
+        profile.save()
+        return redirect(f'/household/{household.pk}/')
 class HouseholdUpdate(UpdateView): # Add login mixin
     model = Household
     fields = ['name']

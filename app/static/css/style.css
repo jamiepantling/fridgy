@@ -35,6 +35,17 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
 }
 
+.white-btn {
+    width: 137px;
+    height: 52px;
+    border-radius: 30px;
+    background-color: #fff;
+    color: black;
+    border: 1px solid black;
+    font-weight: bold;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
+}
+
 .long-btn {
     width: 225px;
     height: 45px;

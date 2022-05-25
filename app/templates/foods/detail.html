@@ -19,7 +19,12 @@
         <div>
             Owner: {{food.user}}
         </div>
-        <button class="btn mt-10">Edit Item</button>
+        <div>
+            <a href="{% url 'foods_update' food.id %}"><button class="btn mt-10">Edit Item</button></a>
+        </div>
+        <div>
+            <a href="{% url 'index' %}"> <button class="white-btn mt-5">Back</button></a>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,12 +1,49 @@
-{% extends 'base.html' %}
-{% block content %}
-
-<h1>Edit Profile</h1>
-<form action="{% url 'profile_update' user.id %}" method="POST">
-{% csrf_token %}
-{{ update_user_form.as_p }}
-{{ update_profile_form.as_p }}
-<input type="submit" name="" id="">
-</form>
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="edit-profile-container mx-auto items-center flex flex-col">
+  <div class="">
+    <h5 class="text-center font-bold mb-5">Edit Profile Information</h5>
+  </div>
+  <div class="w-full">
+    <form action="{% url 'profile_update' user.id %}" method="POST">
+      {% csrf_token %}<div class="flex flex-col items-between ">
+    <div class="flex justify-between items-center mb-5">
+        <div>Username:</div>
+        <div>{% render_field update_user_form.username class+="profile-input-box" value=user.username %}</div>
+    </div>
+    <div class="flex justify-between items-center mb-5">
+        <div>First Name:</div>
+        {% if user.first_name %}
+        <div>{% render_field update_user_form.first_name class+="profile-input-box" value=user.first_name %}</div>
+        {% else %}
+        <div>{% render_field update_user_form.first_name class+="profile-input-box" placeholder="Enter First Name" %}</div>
+        {% endif %}
+    </div>
+    <div class="flex justify-between items-center mb-5">
+        <div class="">Last Name:</div>
+        {% if user.last_name %}
+        <div>{% render_field update_user_form.last_name class+="profile-input-box" value=user.last_name %}</div>
+        {% else %}
+        <div>{% render_field update_user_form.last_name class+="profile-input-box" placeholder="Enter Last Name" %}</div>
+        {% endif %}
+    </div>
+    <div class="flex justify-between items-center mb-5">
+        <div>Email Address:</div>
+        {% if user.email %}
+        <div>{% render_field update_user_form.email class+="profile-input-box" value=user.email %}</div>
+        {% else %}
+        <div>{% render_field update_user_form.email class+="profile-input-box" placeholder="Enter Email" %}</div>
+        {% endif %}
+    </div>
+    <div class="flex justify-between items-center mb-5">
+        <div>User Image</div>
+        <div>{% render_field update_profile_form.user_image class+="profile-input-box" %}</div>
+      
+    </div>
+    <div class="flex justify-center">
+    <input type="submit" class="btn" name="" id="" />
+    </div>
+    </form>
+  </div>
+</div>
 
 {% endblock %}

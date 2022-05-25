@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if error_message  %}
+    <p class="red-text">{{error_message}}</p>
+{% endif %}
+<form action="{% url 'group_create' %}" method="POST">
+    {% csrf_token %}
+    <div class="input-field">
+    {{ form.as_p }}
+    <input type="submit" class="btn" value="create">
+</div>
+</form>
+
+
+{% endblock %}

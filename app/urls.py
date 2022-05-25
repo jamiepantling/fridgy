@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    
+
     # Food url patterns
     path("foods/", views.foods_index, name="index"),
     path("foods/create/", views.FoodCreate.as_view(), name="foods_create"),
@@ -12,10 +12,12 @@ urlpatterns = [
     path('foods/<int:pk>/delete/', views.FoodDelete.as_view(), name='foods_delete'),
     
     # Household url patterns
-    path('household/', views.household_index, name='houeshold_index'), # Just to check if housheold had been created, no need to route users here
-    path('household/<int:household_id>/', views.household_detail, name='household_detail'),
+    path('household/', views.household_index, name='household_index'), # Just to check if housheold had been created, no need to route users here
     path('household/create/', views.HouseholdCreate.as_view(), name='household_create'),
-    path('household/<int:pk>/update/', views.HouseholdUpdate.as_view(), name='household_update'),
+    path('household/<int:household_id>/', views.household_detail, name='household_detail'),
+    path('household/<int:household_id>/edit/', views.household_edit, name='household_edit'),
+    path('household/<int:household_id>/update/', views.household_update, name='household_update'),
+    path('household/<int:household_id>/remove/', views.household_remove_user, name='household_remove_user'),
     path('household/<int:pk>/delete/', views.HouseholdDelete.as_view(), name='household_delete'),
 
     # accounts url patterns

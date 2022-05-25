@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ household.name }}</h1>
+
+<h4>Add new people:</h4>
+<form action="{% url 'household_update' household.id %}" method="POST">
+    {% csrf_token %}
+    <select name="user">
+        {% for u in users_not_in_house %}
+        <option value="{{ u.user }}">{{ u.user }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" name="" id="">
+</form>
+
+<h4>People in the household:</h4>
+<ul>
+{% for u in users_in_house %}
+<li>{{ u.user.username }} - {{ u.user.first_name }} {{ u.user.last_name }}
+<form action="{% url 'household_remove_user' household.id %}" method="POST">
+    {% csrf_token %}
+    <select name="user" style="display: none;"><option value="{{ u.user }}"></option></select>
+        <input type="submit"></form></li>
+{% endfor %}
+
+
+
+{% endblock %}

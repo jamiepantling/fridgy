@@ -4,26 +4,26 @@
     font-family: 'Koulen', cursive;
 }
 
-#id_username { 
-    border: 1px solid black;
+.edit-profile-container {
     width: 343px;
-    height: 41px;
-    border-radius: 20px;
 }
 
-#id_password1{ 
+.profile-input-box {
     border: 1px solid black;
-    width: 343px;
+    width: 192px;
     height: 41px;
     border-radius: 20px;
+    box-shadow: inset 0 0 8px 0 #d7dcf9;
 }
 
-#id_password2{ 
+.input-box {
     border: 1px solid black;
     width: 343px;
     height: 41px;
     border-radius: 20px;
+    box-shadow: inset 0 0 2px 0 #d7dcf9;
 }
+
 
 .btn {
     width: 137px;
@@ -31,8 +31,8 @@
     border-radius: 30px;
     background-color: #d7dcf9;
     color: black;
-    border: 1px solid black;
     font-weight: bold;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
 }
 
 #logo {

@@ -13,13 +13,13 @@
             {% csrf_token %}
             <div class="grid-cols-1 items-center">
                 <div class="mt-5">
-                    {% render_field form.username placeholder="Username" %}
+                    {% render_field form.username class+="input-box" placeholder="Username" %}
                 </div>
                 <div class="mt-5">
-                    {% render_field form.password1 placeholder="Password" %}
+                    {% render_field form.password1 class+="input-box" placeholder="Password" %}
                 </div>
                 <div class="mt-5">
-                    {% render_field form.password2 placeholder="Re-enter password" %}
+                    {% render_field form.password2 class+="input-box" placeholder="Re-enter password" %}
                 </div>
                 <div class="text-center">
                     <input class="btn mt-5" type="submit" value="Sign up">

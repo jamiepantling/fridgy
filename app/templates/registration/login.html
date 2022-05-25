@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block content %}
 
-<div class="container">
-    <div class="center"><h5>Log in</h5></div>
-    <div class="center"><img id="login-fridge" src="../../static/img/fridge.png"></div>
-    <div class="center logo-text"><h4>Fridgy</h4></div>
-<div class="center" id="login-form-container">
-    <form action="{% url 'login' %}" method="POST">
+<div class="flex flex-col items-center">
+    <div class="flex flex-col items-center">
+        <h5 class="text-center text-2xl mb-2">Log in</h5>
+
+        <div class="mb-2"><img id="login-fridge" src="../../static/img/fridgy-logo.png"></div>
+        <div class=" logo-text"><h4 class="text-4xl">Fridgy</h4></div>
+    <div class="center" id="login-form-container">
+        <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
-        <div><span>Username:</span></div>
-        {{ form.username }}
-        <div><span>Password:</span></div>
-        {{ form.password }}
-       <div class="center"><input type="submit" class="btn " value="login"></div>
-       <div class="center"></div><input type="hidden" name="next" value="{{ next }}"></div>
-    </form>
-</div>
+        <div class="mt-5">
+            {% render_field form.username class+="input-box" placeholder="Enter username" %}
+        </div>
+        <div class="mt-5">
+            {% render_field form.password class+="input-box" placeholder="Enter password" %}
+        </div>
+        <div class="grid grid-cols-2 mt-5">
+            <div class="col-span-1"><input type="submit" class="btn" value="Log in"></div>
+            <div class="col-span-1 text-center">New User? <br/><a href="{% url 'signup' %}"><span class="underline font-bold">Create an account</span></a></div>
+        </div>
+        <div class=""><input type="hidden" name="next" value="{{ next }}"></div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

@@ -30,7 +30,7 @@ def foods_index(request):
     for food in foods:
         profile = Profile.objects.get(user=food.user)
         food.user_image = profile.user_image
-    return render(request, 'foods/index.html', {"foods": foods})
+    return render(request, 'foods/index.html', {'foods': foods})
 # @login_required
 def foods_detail(request, food_id):
     food = Food.objects.get(id=food_id)
@@ -52,6 +52,7 @@ class FoodCreate(CreateView): # Add login mixin
 class FoodUpdate(UpdateView): # Add login mixin
     model = Food
     fields = ['food_name', 'category', 'expiry', 'shareable', 'count', 'food_image']
+    success_url = '/foods/'
 class FoodDelete(DeleteView): # Add login mixin
     model = Food
     success_url = '/foods/' # Go back to all

@@ -27,11 +27,6 @@
                     
                     {% if user.is_authenticated %}
                     <li>
-<<<<<<< HEAD
-                        <div class=" border-2 border-neutral-900 rounded">
-                        <a class="px-2 rounded-md" href="">Household</a> <!-- Add URL -->
-                        </div>
-=======
                         <div class="rounded-2xl border border-black mx-2 px-1 flex items-center">
                             {% if user.profile.household %}
                             <a class="inline-block h-7" href="{% url 'household_detail' user.profile.household.id %}">
@@ -51,7 +46,6 @@
                     </li>
                     <li>
                         <a href="{% url 'profile_detail' user.id %}"><img class="foodbox-avatar mx-1 rounded-full" src='{{user.profile.user_image}}'></a>
->>>>>>> master
                     </li>
                     <li>
                         <a class="px-2" href="{% url 'logout' %}">Log out</a>

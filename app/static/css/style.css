@@ -80,7 +80,6 @@
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25)
 }
 
-
 #logo {
     height: 45px;
     margin: 0 5px 0 0;
@@ -123,6 +122,10 @@
     height: 28px;
 }
 
+.household-avatar {
+    height: 36px;
+}
+
 .trash {
     height: 28px;
 }
@@ -147,7 +150,7 @@ hr {
     margin-bottom: 64px;
 
 }
-.food-list-container {
+.food-list-container{
     font-size: 24px;
 }
 

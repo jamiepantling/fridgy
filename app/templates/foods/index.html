@@ -12,19 +12,28 @@
         <div class="food-list">  
             {% for food in foods %}
             {% if food.user == user %}
-            <div class="food-box flex items-center">
-                <div class="flex w-full justify-between items-center">
-                    <a href='{% url "foods_detail" food.id %}'><div class="">{{ food.food_name}}</div></a>
-                    
-                    <div class="flex items-center">
-                        <div class="">
-                            <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
-                        </div>
-                        <a href=''>
-                            <img class="trash" src="../../static/img/trash.svg">
+            <div class="food-box flex-col flex  items-center">
+ 
+                    <div class="flex w-full justify-between items-center">
+                        <a href='{% url "foods_detail" food.id %}'>
+                            <div class="">{{ food.food_name}}
+                            </div>
                         </a>
+                        
+                        <div class="flex items-center">
+                            <div class="">
+                                <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
+                            </div>
+                            <a href='{% url "foods_delete" food.id %}'>
+                                <img class="trash" src="../../static/img/trash.svg">
+                            </a>
+                        </div>
                     </div>
-                </div>
+                
+                {% if food.food_image %}
+                <a href='{% url "foods_detail" food.id %}'><img class="food-img my-3" src="{{food.food_image}}"></a>
+                {% endif %}
+
             </div>
             {% endif %}
             {% endfor %}
@@ -35,22 +44,29 @@
         <div class="food-list">  
             {% for food in foods %}
             {% if food.shareable %}
-            <div class="food-box food-box-shared flex items-center">
+            <div class="food-box food-box-shared flex-col flex  items-center">
  
                 <div class="flex w-full justify-between items-center">
-                    <a href='{% url "foods_detail" food.id %}'><div class="">{{ food.food_name}}</div></a>
+                    <a href='{% url "foods_detail" food.id %}'>
+                        <div class="">{{ food.food_name}}
+                        </div>
+                    </a>
                     
                     <div class="flex items-center">
                         <div class="">
-                            <img class="foodbox-avatar mx-1 rounded-full" src='{{food.user_image}}'>
+                            <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
                         </div>
-                        <a href="">
+                        <a href='{% url "foods_delete" food.id %}'>
                             <img class="trash" src="../../static/img/trash.svg">
                         </a>
                     </div>
                 </div>
- 
-            </div>
+            
+            {% if food.food_image %}
+            <a href='{% url "foods_detail" food.id %}'><img class="food-img my-3" src="{{food.food_image}}"></a>
+            {% endif %}
+
+        </div>
             {% endif %}
             {% endfor %}
         </div>
@@ -60,19 +76,27 @@
         <div class="food-list">  
             {% for food in foods %}
             {% if not food.shareable %}
-            <div class="food-box food-box-off-limits flex items-center">
+            <div class="food-box food-box-off-limits flex-col flex  items-center">
+ 
                 <div class="flex w-full justify-between items-center">
-                    <a href='{% url "foods_detail" food.id %}'><div class="">{{ food.food_name}}</div></a>
+                    <a href='{% url "foods_detail" food.id %}'>
+                        <div class="">{{ food.food_name}}
+                        </div>
+                    </a>
                     
                     <div class="flex items-center">
                         <div class="">
-                            <img class="foodbox-avatar mx-1 rounded-full" src='{{food.user_image}}'>
+                            <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
                         </div>
-                        <a href="">
+                        <a href='{% url "foods_delete" food.id %}'>
                             <img class="trash" src="../../static/img/trash.svg">
                         </a>
                     </div>
                 </div>
+            
+            {% if food.food_image %}
+            <a href='{% url "foods_detail" food.id %}'><img class="food-img my-3" src="{{food.food_image}}"></a>
+            {% endif %}
             </div>
             {% endif %}
             {% endfor %}

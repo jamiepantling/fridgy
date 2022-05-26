@@ -23,7 +23,15 @@ def home(request):
 # Food functions
 # @login_required
 def foods_index(request):
-    foods = Food.objects.all()
+    household = Household.objects.get(id=request.user.profile.household.id)
+    in_household = Profile.objects.filter(household=household).values_list('user')
+    users = User.objects.filter(id__in = in_household)
+    print("HOUSE: ", in_household)
+    print(Profile.objects.filter(household=household).values_list('user'))
+    print(household)
+    print(users)
+    foods = Food.objects.filter(user__in=users)
+    print(foods.values_list())
     for food in foods:
         profile = Profile.objects.get(user=food.user)
         food.user_image = profile.user_image
@@ -51,7 +59,7 @@ class FoodUpdate(UpdateView): # Add login mixin
     fields = ['food_name', 'category', 'expiry', 'shareable', 'count', 'food_image']
 class FoodDelete(DeleteView): # Add login mixin
     model = Food
-    success_url = 'foods_index' # Go back to all
+    success_url = '/foods/' # Go back to all
 
 # Household functions
 

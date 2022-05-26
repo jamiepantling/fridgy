@@ -28,7 +28,11 @@
                     {% if user.is_authenticated %}
                     <li>
                         <div class="rounded-2xl border border-black mx-2 px-1 flex items-center">
+                            {% if user.profile.household %}
                             <a class="inline-block h-7" href="{% url 'household_detail' user.profile.household.id %}">
+                            {% else %}
+                            <a href="inline-block h-7" href="{% url 'household_create' %}"></a>
+                            {% endif %}
                                 <div class="flex justify-center items-center">
                                     <div>
                                        <img class="trash" src="../../static/img/household.svg">

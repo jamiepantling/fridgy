@@ -805,6 +805,13 @@ select {
 
 .ml-1 {
   margin-left: 0.25rem;
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.block {
+  display: block;
 }
 
 .ml-2 {

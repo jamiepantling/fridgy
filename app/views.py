@@ -51,7 +51,7 @@ class FoodUpdate(UpdateView): # Add login mixin
     fields = ['food_name', 'category', 'expiry', 'shareable', 'count', 'food_image']
 class FoodDelete(DeleteView): # Add login mixin
     model = Food
-    success_url = 'foods_index' # Go back to all
+    success_url = '/foods/' # Go back to all
 
 # Household functions
 

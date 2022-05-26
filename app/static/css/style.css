@@ -122,6 +122,10 @@
     height: 28px;
 }
 
+.household-avatar {
+    height: 36px;
+}
+
 .trash {
     height: 28px;
 }
@@ -146,7 +150,7 @@ hr {
     margin-bottom: 64px;
 
 }
-.food-list-container {
+.food-list-container{
     font-size: 24px;
 }
 

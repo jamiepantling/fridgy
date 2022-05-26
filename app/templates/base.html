@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="mb-8">
             <div class="m-2 flex justify-end">
                 <div class="flex-1">
                     <a href="{% url 'index' %}" class="">
@@ -30,18 +30,27 @@
                         <div class="rounded-2xl border border-black mx-2 px-1 flex items-center">
                             {% if user.profile.household %}
                             <a class="inline-block h-7" href="{% url 'household_detail' user.profile.household.id %}">
-                            {% else %}
-                            <a href="inline-block h-7" href="{% url 'household_create' %}"></a>
-                            {% endif %}
                                 <div class="flex justify-center items-center">
                                     <div>
                                        <img class="trash" src="/../../static/img/household.svg">
                                     </div>
                                     <div class="mx-1">
-                                        Household
+                                        {{user.profile.household}}
                                     </div>
                                 </div>
                             </a>
+                            {% else %}
+                            <a class="inline-block h-7" href="{% url 'household_create' %}">
+                                <div class="flex justify-center items-center">
+                                    <div>
+                                       <img class="trash" src="/../../static/img/household.svg">
+                                    </div>
+                                    <div class="mx-1">
+                                        Create household
+                                    </div>
+                                </div>
+                            </a>
+                            {% endif %}
                         </div>
                     </li>
                     <li>

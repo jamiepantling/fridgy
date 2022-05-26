@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center font-bold mb-5">Delete Food</h1>
+  
+  <h4 class="text-center font-bold mb-5">Are you sure you want to delete <span class="">{{ object.food_name }}</span>?</h4>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="flex justify-center">
+    <input type="submit" value="Yes - Delete!" class="btn  mb-5"> 
+    </div>
+
+    <div class="flex justify-center">
+    <a href="{% url 'foods_detail' food.id %}" class="btn text-center">Cancel</a>
+  </div>
+  </form>
+{% endblock %}

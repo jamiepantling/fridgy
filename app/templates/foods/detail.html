@@ -19,11 +19,18 @@
         <div>
             Owner: {{food.user}}
         </div>
+        {% if food.user == user %}
         <div>
             <a href="{% url 'foods_update' food.id %}"><button class="btn mt-10">Edit Item</button></a>
         </div>
+        {% endif %}
+        {% if food.shareable %}
         <div>
-            <a href="{% url 'index' %}"> <button class="white-btn mt-5">Back</button></a>
+            <a href="{% url 'foods_delete' food.id %}"><button class="delete-btn mt-5">Delete Item</button></a>
+        </div>
+        {% endif %}
+        <div>
+            <a href="{% url 'index' %}"> <button class="white-btn mt-5">All foods</button></a>
         </div>
     </div>
 </div>

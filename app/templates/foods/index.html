@@ -108,9 +108,11 @@
                         <div class="">
                             <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
                         </div>
+                        {% if food.user == user %}
                         <a href='{% url "foods_delete" food.id %}'>
                             <img class="trash" src="../../static/img/trash.svg">
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             

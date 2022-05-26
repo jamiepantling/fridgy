@@ -2,7 +2,13 @@
 
 {% block content %}
   <h1 class="text-center text-2xl mb-5">Delete Item</h1>
-  
+  {% if not food.shareable and not food.user == user %}
+
+  <div class="flex flex-col items-center">This item is not shared - only <span class="font-bold">{{food.user}}</span> can delete this item.
+  <a href="{% url 'foods_detail' food.id %}"><button class="white-btn mt-5 text-center">Food details</button></a>
+</div>
+  {% else %}
+
   <h4 class="text-center  mb-5">Are you sure you want to delete <span class="">{{ object.food_name }}</span>?</h4>
 
   <form action="" method="POST">
@@ -14,5 +20,7 @@
     <div class="flex items-center my-auto justify-center">
     <a href="{% url 'foods_detail' food.id %}"><button class="btn text-center">Cancel</button></a>
   </div>
+
+  {% endif %}
  
 {% endblock %}

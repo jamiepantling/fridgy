@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fridgy',
-        # 'USER': 'somay',
-        # 'PASSWORD': 'password'
+        'USER': 'somay',
+        'PASSWORD': 'password'
 
     }
 }

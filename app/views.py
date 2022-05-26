@@ -118,17 +118,23 @@ class HouseholdCreate(CreateView): # Add login mixin
     fields = ['name']
 
     def form_valid(self, form):
-        household = form.save(commit=False)
         user = self.request.user
-        profile = Profile.objects.get(user=user)
-        profile.household = household
+        user.profile.household_manager = True
+        household = form.save(commit=False)
+        user.profile.household = household
         user.save()
         household.save()
-        profile.save()
+        user.profile.save()
         return redirect(f'/household/{household.pk}/')
 class HouseholdDelete(DeleteView): # Add login mixin
     model = Household
-    success_url = '/' # Change success?
+    def remove_manager(self):
+        profile = self.request.user
+        profile.household_manager = False
+        profile.save()
+        return redirect('home')
+    success_url = '/'
+    
 
 
 # Authorization functions

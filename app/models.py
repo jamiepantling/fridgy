@@ -53,11 +53,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     household = models.ForeignKey(
         Household,
-        on_delete=models.CASCADE,
+        on_delete=models.SET(None),
         blank=True,
         null=True
         )
-    hosuehold_manager = models.BooleanField(default=False)
+    household_manager = models.BooleanField(default=False)
     user_image = models.CharField(
         max_length=200,
         default='https://i.imgur.com/G4NNtuW.png')

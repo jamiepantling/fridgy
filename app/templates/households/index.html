@@ -6,34 +6,34 @@
 
 <div class="flex flex-col items-center justify-center ">
 
-{% for h in household %}
-<div class = '  w-30 justify-between items-center mt-5'>
-<div class=" food-box flex justify-between border border-neutral-800 rounded w-64 shadow-lg " >
-    <a href="{% url 'household_update' h.id %}">
-<p >{{ h.name }}</p>
-</a>
+{% for user in users_in_house %}  
 
-<div class="">
-    <img class="foodbox-avatar mx-1 rounded-full " src='{{user.profile.user_image}}'>
-</div>
-
-<div class="flex items-center ">
-    <a class="" href="{% url 'household_delete' h.id %}">
-    <img class="trash " src="../../static/img/trash.png">
+<div class="food-box flex justify-between border border-neutral-800 rounded shadow-lg items-center " >
+    <div class="flex items-center">
+        <div class="mr-5">
+            <img class="h-14 rounded-full " src='{{user.profile.user_image}}'>
+        </div>
+        <div>
+            <a href="{% url 'household_update' h.id %}">
+            <p class="text-xl">{{ h.name }}</p>
+            </a>
+        </div>
+    </div>
+        
+<a class="" href="{% url 'household_delete' h.id %}">
+    <img class="h-10" src="../../static/img/trash.png">
     </a>
-</div>
-</div>
 
-<!-- <div >
-<a href="{% url 'household_update' h.id %}" class=" btn mt-10 text-center">Add User</a>
-</div> -->
+</div>
 
 {% endfor %}
-</div>
+
 
 <a href="{% url 'household_update' user.id %}">
-    <button class=" btn ">Add User</button>
+    <button class=" btn my-4">Add User</button>
 </a>
 
 <button class=" white-btn ">Back</button>
 {% endblock %}
+</div>
+</div>

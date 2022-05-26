@@ -1,15 +1,41 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block content %} 
+<dev class = "Household">
+<h1 class="text-center text-2xl mb-5">{{household.name}}</h1>
+</dev>
 
-<h1>{{ household.name }}</h1>
-{% if users_in_house %}
-{% for user in users_in_house %}
-<p>{{ user.user.username }}</p>
-<p>{{ user.user.first_name }} {{ user.user.last_name }}</p>
-<hr>
+<div class="flex flex-col items-center justify-center ">
+
+{% for profile in users_in_house %}  
+
+<div class="food-box flex justify-between border border-neutral-800 rounded shadow-lg items-center " >
+    <div class="flex items-center">
+        <div class="mr-5">
+            <img class="h-14 rounded-full " src='{{profile.user_image}}'>
+        </div>
+        <div>
+            <a href="{% url 'profile_detail' user.id %}">
+            <p class="text-xl">{{ profile.user.username }}</p>
+            </a>
+        </div>
+    </div>
+        
+<a class="" href="">
+    <img class="h-10" src="../../static/img/trash.png">
+    </a>
+
+</div>
+
 {% endfor %}
-{% else %}
-<p>You're all alone</p>
-{% endif %}
 
+
+        <a href="{% url 'household_update' user.id %}">
+            <button class=" btn my-4">Add User</button>
+        </a>
+
+        <a href="{%url 'index' %}">
+            <button class=" white-btn ">Food List</button>
+        </a>
 {% endblock %}
+    </div>
+</div>

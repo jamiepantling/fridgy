@@ -156,6 +156,7 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
 def login_success(request):
     if request.user.profile.household:
         return redirect('index')

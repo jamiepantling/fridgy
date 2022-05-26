@@ -2,8 +2,13 @@
 {% block content %}
 <div class="food-list-container flex justify-center">
     <div >
+        
         <h5 class="text-center font-bold mb-5">Which food is shared?</h5>
-
+        <div class="flex justify-center">
+            <a href="{% url 'foods_create' %}">
+                <button id="add-item-btn" class="mb-10"><h5 id="add-item-btn-text"> Add item</h5></button>
+            </a>
+        </div>
         <div class="food-list-header">
             <h5 class="sub-list-title">My Stuff</h5>
         </div>
@@ -21,6 +26,15 @@
                         </a>
                         
                         <div class="flex items-center">
+                            {% if food.shareable %}
+                            <div class="">
+                                <img class="foodbox-avatar mx-1 " src='../../static/img/tick.png'>
+                            </div>
+                            {% else %}
+                            <div class="">
+                                <img class="foodbox-avatar mx-1 " src='../../static/img/nope.png'>
+                            </div>
+                            {% endif %}
                             <div class="">
                                 <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
                             </div>
@@ -54,6 +68,9 @@
                     
                     <div class="flex items-center">
                         <div class="">
+                            <img class="foodbox-avatar mx-1 " src='../../static/img/tick.png'>
+                        </div>
+                        <div class="">
                             <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
                         </div>
                         <a href='{% url "foods_delete" food.id %}'>
@@ -86,6 +103,9 @@
                     
                     <div class="flex items-center">
                         <div class="">
+                            <img class="foodbox-avatar mx-1 " src='../../static/img/nope.png'>
+                        </div>
+                        <div class="">
                             <img class="foodbox-avatar mx-1 rounded-full " src='{{food.user_image}}'>
                         </div>
                         <a href='{% url "foods_delete" food.id %}'>
@@ -101,11 +121,7 @@
             {% endif %}
             {% endfor %}
         </div>
-        <div class="flex justify-center">
-            <a href="{% url 'foods_create' %}">
-                <button id="add-item-btn" class="mb-10"><h5 id="add-item-btn-text"> Add item</h5></button>
-            </a>
-        </div>
+        
     </div>
 </div>
 

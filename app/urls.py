@@ -22,6 +22,7 @@ urlpatterns = [
 
     # accounts url patterns
     path('accounts/signup/', views.signup, name='signup'),
+    path('accounts/login/success/', views.login_success, name='login_success'),
     path('password-change/', views.change_password, name='user_change_password'),
     path('accounts/password-change/done/', views.change_password_done, name='change_password_done'),
     path('profile/<int:user_id>/', views.profile_detail, name='profile_detail'),

@@ -8,7 +8,9 @@ urlpatterns = [
     path("foods/", views.foods_index, name="index"),
     path("foods/create/", views.FoodCreate.as_view(), name="foods_create"),
     path('foods/<int:food_id>/', views.foods_detail, name='foods_detail'),
-    path('foods/<int:pk>/update/', views.FoodUpdate.as_view(), name='foods_update'),
+    path('foods/<int:food_id>/edit/', views.foods_edit, name='foods_edit'),
+   # path('foods/<int:food_id>/update/', views.foods_update, name='foods_update'),
+    # path('foods/<int:pk>/update/', views.FoodUpdate.as_view(), name='foods_update'),
     path('foods/<int:pk>/delete/', views.FoodDelete.as_view(), name='foods_delete'),
     
     # Household url patterns
@@ -36,5 +38,5 @@ urlpatterns = [
     path('group/<int:group_id>/', views.group_detail, name='group_detail'),
 
     # Tailwind CSS reload 
-    path("__reload__/", include("django_browser_reload.urls")),
+    # path("__reload__/", include("django_browser_reload.urls")),
 ]

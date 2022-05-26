@@ -12,9 +12,10 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from urllib3 import HTTPResponse
 
 from .models import Food, Household, Profile
-from .forms import GroupCreationForm, UpdateUserForm, UpdateProfileForm
+from .forms import GroupCreationForm, UpdateUserForm, UpdateProfileForm, FoodUpdateForm
 
 # Create your views here.
 def home(request):
@@ -35,7 +36,22 @@ def foods_index(request):
 def foods_detail(request, food_id):
     food = Food.objects.get(id=food_id)
     return render(request, 'foods/detail.html', { 'food': food })
-
+def foods_edit(request, food_id):
+    error_message = ''
+    if request.method == 'POST':
+        food = Food.objects.get(id=food_id)
+        food_image = request.POST['food_image']
+        shareable = request.POST.get('shareable', False)
+        count = request.POST['count']
+        food.shareable = shareable
+        food.food_image = food_image
+        food.count = count
+        food.save()
+        return redirect('/foods/')
+    form = FoodUpdateForm()
+    food = Food.objects.get(id=food_id)
+    context = { 'form': form, 'error_message': error_message, 'food':food }
+    return render(request, 'foods/edit.html', context)
 # Food Class-based views
 
 class FoodCreate(CreateView): # Add login mixin
@@ -49,10 +65,12 @@ class FoodCreate(CreateView): # Add login mixin
         food.save()
         return redirect('/foods/')
         
-class FoodUpdate(UpdateView): # Add login mixin
-    model = Food
-    fields = ['food_name', 'category', 'expiry', 'shareable', 'count', 'food_image']
-    success_url = '/foods/'
+# class FoodUpdate(UpdateView): # Add login mixin
+#     model = Food
+#     fields = ['food_name', 'category', 'expiry', 'shareable', 'count', 'food_image']
+#     def form_valid(self, form):
+#         food = form.save()
+#         return redirect('/foods/')
 class FoodDelete(DeleteView): # Add login mixin
     model = Food
     success_url = '/foods/' # Go back to all

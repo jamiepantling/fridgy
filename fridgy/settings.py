@@ -91,8 +91,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fridgy',
-        'USER': 'somay',
-        'PASSWORD': 'password'
+        # 'USER': 'somay',
+        # 'PASSWORD': 'password'
 
     }
 }
@@ -137,7 +137,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_REDIRECT_URL = '/foods/'
+LOGIN_REDIRECT_URL = 'login_success'
 
 LOGOUT_REDIRECT_URL = '/'
 

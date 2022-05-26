@@ -31,7 +31,7 @@
                             {% if user.profile.household %}
                             <a class="inline-block h-7" href="{% url 'household_detail' user.profile.household.id %}">
                             {% else %}
-                            <a href="inline-block h-7" href="{% url 'household_create' %}"></a>
+                            <a href="inline-block h-7" href="{% url 'household_create' %}">
                             {% endif %}
                                 <div class="flex justify-center items-center">
                                     <div>

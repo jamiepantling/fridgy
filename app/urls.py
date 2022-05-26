@@ -34,5 +34,5 @@ urlpatterns = [
     path('group/<int:group_id>/', views.group_detail, name='group_detail'),
 
     # Tailwind CSS reload 
-    path("__reload__/", include("django_browser_reload.urls")),
+    # path("__reload__/", include("django_browser_reload.urls")),
 ]

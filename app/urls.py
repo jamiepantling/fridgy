@@ -22,7 +22,8 @@ urlpatterns = [
 
     # accounts url patterns
     path('accounts/signup/', views.signup, name='signup'),
-    path('password-change/', views.UserChangePassword.as_view(), name='user_change_password'),
+    path('password-change/', views.change_password, name='user_change_password'),
+    path('accounts/password-change/done/', views.change_password_done, name='change_password_done'),
     path('profile/<int:user_id>/', views.profile_detail, name='profile_detail'),
     path('profile/<int:user_id>/edit/', views.profile_edit, name='profile_edit'),
     path('profile/<int:user_id>/update/', views.profile_update, name='profile_update'),

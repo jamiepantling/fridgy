@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% load widget_tweaks %} 
+{% block content %}
+<div class="flex-col justify-center items-center">
+  <div><h5 class="text-center text-2xl font-bold mb-5">Edit {{food.food_name}}</h5></div>
+  
+  <div class="flex-col items-center justify-center">
+    
+      <form action="{% url 'foods_edit' food.id %}" method="post">
+        {% csrf_token %}
+        <div class="flex-col items-center justify-center">
+          {% if food.food_image %}
+          <div class="flex justify-center my-5">
+            <img class="food-img" src="{{food.food_image}}">
+          </div>
+          {% endif %}
+          <div class="flex flex-col items-center mb-5">
+   
+            <div>{% render_field form.food_image class+="input-box" placeholder="Enter image url (optional)"%}</div>
+          </div>
+          <div class="flex flex-col items-center mb-5">
+            <div><input type="number" name="count" value="{{food.count}}"></div>
+          </div>
+          <div class="flex justify-center items-center">
+              {% if food.shareable %}
+            <input class="mx-2" type="checkbox" name="shareable" value="True" checked>
+            {% else %}
+            <input class="mx-2" type="checkbox" name="shareable" value="True">
+            {% endif %}
+            <div class="mx-2">Share with others?</div>
+          </div>
+
+          <div class="flex justify-center">
+            <input type="submit" value="Submit" class="btn mt-10" />
+          </div>
+      </div>
+      </form>
+ 
+  </div>
+</div>
+{% endblock %}

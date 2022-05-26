@@ -804,8 +804,16 @@ select {
   margin-left: 1.25rem;
 }
 
+
 .ml-6 {
   margin-left: 1.5rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .ml-7 {
@@ -846,6 +854,15 @@ select {
 
 .flex {
   display: flex;
+
+}
+
+.mb-1\.5 {
+  margin-bottom: 0.375rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .inline-flex {

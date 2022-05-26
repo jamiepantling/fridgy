@@ -1,35 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ household.name }}</h1>
+<div class="flex flex-col justify-center items-center">
+    <h1 class="text-xl mb-5">{{ household.name }}</h1>
 
-<h4>Add new people:</h4>
-<form action="{% url 'household_update' household.id %}" method="POST">
-    {% csrf_token %}
-    <select name="user">
-        {% for u in users_not_in_house %}
-        <option value="{{ u.user }}">{{ u.user }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" name="" id="">
-</form>
+    <h4 class="mb-3 font-bold">Add new people:</h4>
+    <form action="{% url 'household_update' household.id %}" method="POST">
+        {% csrf_token %}
+        <select name="user">
+            {% for profile in users_not_in_house %}
+            <option value="{{ profile.user }}">{{ profile.user.username }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" class="px-2 mx-2 tiny-submit-btn" name="" id="">
+    </form>
 
-<h4>People in the household:</h4>
-<ul>
-    {% for u in users_in_house %}
-    <li>{{ u.user.username }} - {{ u.user.first_name }} {{ u.user.last_name }}
+    <h4 class="mt-8 font-bold">People in the household:</h4>
+    <ul>
+        {% for profile in users_in_house %}
+        <li>
+            <div class="flex items-center">
+                
+                <div class="px-2">
+                    {{ profile.user.username }}
+                    {% if profile.user.first_name  %}
+                    - {{ profile.user.first_name }} {{ profile.user.last_name }}
+                    {% endif %}
+                </div> 
+                {% if request.user.profile.household_manager %}
+                    <form action="{% url 'household_remove_user' household.id %}" method="POST">
+                    {% csrf_token %}
+                    <select name="user" style="display: none;"><option value="{{ profile.user }}"></option></select>
+                    <button  class="tiny-delete-btn px-2 my-4">Remove</button></form>
+                {% endif %}
+            </div>
+        
+    {% endfor %}
+
     {% if request.user.profile.household_manager %}
-<form action="{% url 'household_remove_user' household.id %}" method="POST">
-    {% csrf_token %}
-    <select name="user" style="display: none;"><option value="{{ u.user }}"></option></select>
-        <input type="submit"></form></li>
+    <form action="{% url 'household_delete' household.id %}"><button class="delete-btn mt-7">Delete Household</button></form>
     {% endif %}
-{% endfor %}
 
-{% if request.user.profile.household_manager %}
-<form action="{% url 'household_delete' household.id %}"><button>Delete Household</button></form>
-{% endif %}
-
-
+</div>
 
 
 {% endblock %}

@@ -26,12 +26,7 @@ def foods_index(request):
     household = Household.objects.get(id=request.user.profile.household.id)
     in_household = Profile.objects.filter(household=household).values_list('user')
     users = User.objects.filter(id__in = in_household)
-    print("HOUSE: ", in_household)
-    print(Profile.objects.filter(household=household).values_list('user'))
-    print(household)
-    print(users)
     foods = Food.objects.filter(user__in=users)
-    print(foods.values_list())
     for food in foods:
         profile = Profile.objects.get(user=food.user)
         food.user_image = profile.user_image

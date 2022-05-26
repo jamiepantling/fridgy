@@ -15,13 +15,20 @@
 
 <h4>People in the household:</h4>
 <ul>
-{% for u in users_in_house %}
-<li>{{ u.user.username }} - {{ u.user.first_name }} {{ u.user.last_name }}
+    {% for u in users_in_house %}
+    <li>{{ u.user.username }} - {{ u.user.first_name }} {{ u.user.last_name }}
+    {% if request.user.profile.household_manager %}
 <form action="{% url 'household_remove_user' household.id %}" method="POST">
     {% csrf_token %}
     <select name="user" style="display: none;"><option value="{{ u.user }}"></option></select>
         <input type="submit"></form></li>
+    {% endif %}
 {% endfor %}
+
+{% if request.user.profile.household_manager %}
+<form action="{% url 'household_delete' household.id %}"><button>Delete Household</button></form>
+{% endif %}
+
 
 
 

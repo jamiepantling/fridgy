@@ -15,7 +15,7 @@
         <nav>
             <div class="m-2 flex justify-end">
                 <div class="flex-1 ">
-                    <a href="" class="">
+                    <a href="{% url 'index' %}" class="">
                         <div id="logo-holder" class="  logo-text text-xl">
                         <img id="logo" src="/../../static/img/fridge.png"> FRIDGY
                         </div>
@@ -27,9 +27,31 @@
                     
                     {% if user.is_authenticated %}
                     <li>
+<<<<<<< HEAD
                         <div class=" border-2 border-neutral-900 rounded">
                         <a class="px-2 rounded-md" href="">Household</a> <!-- Add URL -->
                         </div>
+=======
+                        <div class="rounded-2xl border border-black mx-2 px-1 flex items-center">
+                            {% if user.profile.household %}
+                            <a class="inline-block h-7" href="{% url 'household_detail' user.profile.household.id %}">
+                            {% else %}
+                            <a href="inline-block h-7" href="{% url 'household_create' %}"></a>
+                            {% endif %}
+                                <div class="flex justify-center items-center">
+                                    <div>
+                                       <img class="trash" src="/../../static/img/household.svg">
+                                    </div>
+                                    <div class="mx-1">
+                                        Household
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile_detail' user.id %}"><img class="foodbox-avatar mx-1 rounded-full" src='{{user.profile.user_image}}'></a>
+>>>>>>> master
                     </li>
                     <li>
                         <a class="px-2" href="{% url 'logout' %}">Log out</a>
@@ -38,6 +60,7 @@
                     <li>
                         <a class="px-2" href="{% url 'signup' %}">Sign up</a>
                     </li>
+                    
                     <li>
                         <a class="px-2" href="{% url 'login' %}">Log in</a>
                     </li>
